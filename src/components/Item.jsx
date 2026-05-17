@@ -11,7 +11,7 @@ const Item = ({ item }) => { // item은 {itemName, price, quantity} 형태의 �
   const handleCartClick = () => {
     setIsAdded(true); 
   }; 
-
+  
   return (
     <div className="flex items-center justify-between w-[600px] border rounded-md px-6 py-4 mb-4">
       <div>

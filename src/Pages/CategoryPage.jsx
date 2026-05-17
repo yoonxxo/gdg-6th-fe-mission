@@ -1,12 +1,21 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import Item from "../components/Item"
-import {categoryData} from "../data/mockData"
+import { getCategoryItems } from "../apis/itemApi";
 
 const CategoryPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoryData, setCategoryData] = useState([]);
   const categories = ["의류", "전자기기", "화장품", "식품"];
 
-   const filteredItems =
+  useEffect(() => {
+    const fetchCategoryItems = async () => {
+      const data = await getCategoryItems();
+      setCategoryData(data);
+    };
+    fetchCategoryItems();
+  }, []);
+
+  const filteredItems =
     selectedCategory === ""
       ? categoryData
       : categoryData.filter(
