@@ -18,13 +18,13 @@ const AdminPage = () => {
 
   const handleRegister = () => {
   postItem({
-    itemName,
-    quantity: Number(quantity),
+    name: itemName,
+    stock: Number(quantity),
     price: Number(price),
-    category,
-  }).then((newItem) => {
+    category: category,
+    }).then((newItem) => {
     console.log(
-      `${newItem.itemName} ${newItem.quantity} ${newItem.price} ${newItem.category} 가 등록되었습니다.`
+      `${newItem.name} ${newItem.stock} ${newItem.price} ${newItem.category} 가 등록되었습니다.`
     );
   });
 };
@@ -33,8 +33,8 @@ const AdminPage = () => {
   updateItem(1, {
     itemName: addName,
     quantity: Number(addQuantity),
-  }).then((updatedItem) => {
-    console.log(`${updatedItem.itemName} ${updatedItem.quantity}개가 추가되었습니다.`);
+  }).then(() => {
+    console.log(`${addName} ${addQuantity}개가 추가되었습니다.`);
   });
 };
 
