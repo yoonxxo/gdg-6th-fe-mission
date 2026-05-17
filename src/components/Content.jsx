@@ -1,7 +1,20 @@
 import Button from "./common/Button";  
 import Input from "./common/Input"; 
+import { getItems } from "../apis/itemApi";
+import { useEffect, useState } from "react";
 
 const Content = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const data = await getItems();
+      setItems(data);
+    };
+
+    fetchItems();
+  }, []);
+
   return (
     <main className="grow w-full flex flex-col">
     <div className="flex gap-3">

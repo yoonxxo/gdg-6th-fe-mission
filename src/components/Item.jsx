@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "./common/Input";
 
 const Item = ({ item }) => { // item은 {itemName, price, quantity} 형태의 객체
   const [count, setCount] = useState("");
@@ -13,7 +14,7 @@ const Item = ({ item }) => { // item은 {itemName, price, quantity} 형태의 �
   }; 
   
   return (
-    <div className="flex items-center justify-between w-[600px] border rounded-md px-6 py-4 mb-4">
+    <div className="flex items-center justify-between w-[600px] border border-gray-300 rounded-md px-6 py-4 mb-4">
       <div>
         <h3 className="font-bold">{item.itemName}</h3>
         <p className="text-sm text-gray-500">
@@ -21,18 +22,17 @@ const Item = ({ item }) => { // item은 {itemName, price, quantity} 형태의 �
         </p>
       </div>
 
-      <input
+      <Input
         type="number"
         placeholder="개수 입력..."
         value={count} //count는 input값이 바뀔 때마다 업데이트되서 화면에 보여줌
         onChange={handleChange} //onChange는 input값이 바뀔 때마다 handleChange함수 실행
-        className="border rounded-md px-3 py-2 w-58 text-sm"
       />
 
       <button
         onClick={handleCartClick}
         disabled={added}
-        className={`px-5 py-2 rounded-md text-white ${
+        className={`px-5 py-2 rounded-md text-white cursor-pointer ${
           added ? "bg-gray-400" : "bg-blue-500"
         }`}
       >

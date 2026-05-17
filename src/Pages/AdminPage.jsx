@@ -1,4 +1,9 @@
 import { useState } from "react";
+import Button from "../components/common/Button";
+import Input from "../components/common/Input";
+import { postItem } from "../apis/itemApi";
+import { updateItem } from "../apis/itemApi";
+import { deleteItem } from "../apis/itemApi";
 
 const AdminPage = () => {
   const [itemName, setItemName] = useState("");
@@ -12,111 +17,160 @@ const AdminPage = () => {
   const [deleteName, setDeleteName] = useState("");
 
   const handleRegister = () => {
-    console.log(`${itemName} ${quantity} ${price} ${category} 가 등록되었습니다.`);
-  };
+  postItem({
+    itemName,
+    quantity: Number(quantity),
+    price: Number(price),
+    category,
+  }).then((newItem) => {
+    console.log(
+      `${newItem.itemName} ${newItem.quantity} ${newItem.price} ${newItem.category} 가 등록되었습니다.`
+    );
+  });
+};
 
   const handleAddStock = () => {
-    console.log(`${addName} ${addQuantity}개가 추가되었습니다.`);
-  };
+  updateItem(1, {
+    itemName: addName,
+    quantity: Number(addQuantity),
+  }).then((updatedItem) => {
+    console.log(`${updatedItem.itemName} ${updatedItem.quantity}개가 추가되었습니다.`);
+  });
+};
 
   const handleDelete = () => {
+  deleteItem(1).then(() => {
     console.log(`${deleteName}가 삭제되었습니다.`);
-  };
+  });
+};
 
   return (
     <main className="flex flex-col items-center mt-16 gap-12">
-      <section>
+      <section className="w-[600px]">
         <h2 className="font-bold mb-4">상품 등록</h2>
 
-        <div className="border rounded-md p-6 flex flex-col gap-3 w-[600px]">
-          <input
-            type="text"
-            placeholder="상품명 입력..."
-            value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
-            className="border px-3 py-2 rounded-md"
-          />
+        <div className="border border-gray-300 rounded-md p-6">
+          <div className="grid grid-cols-2 gap-3 mb-3">
+            <div className="flex items-center gap-2">
+              <p className="w-14 text-sm">상품명</p>
+              <Input
+                placeholder="상품명 입력..."
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
+                className="border px-3 py-2 rounded-md text-sm flex-1"
+              />
+            </div>
 
-          <input
-            type="number"
-            placeholder="수량 입력..."
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            className="border px-3 py-2 rounded-md"
-          />
+            <div className="flex items-center gap-2">
+              <p className="w-10 text-sm">수량</p>
+              <Input
+                type="number"
+                placeholder="0"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                className="border px-3 py-2 rounded-md text-sm flex-1"
+              />
+            </div>
 
-          <input
-            type="number"
-            placeholder="가격 입력..."
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className="border px-3 py-2 rounded-md"
-          />
+            <div className="flex items-center gap-2">
+              <p className="w-14 text-sm">가격</p>
+              <Input
+                type="number"
+                placeholder="0"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="border px-3 py-2 rounded-md text-sm flex-1"
+              />
+            </div>
 
-          <input
-            type="text"
-            placeholder="카테고리 입력..."
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="border px-3 py-2 rounded-md"
-          />
+            <div className="flex items-center gap-2">
+              <p className="w-10 text-sm">카테고리</p>
+              <Input
+                type="text"
+                placeholder="카테고리 선택"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="border px-3 py-2 rounded-md text-sm flex-1"
+              />
+            </div>
+          </div>
 
-          <button
-            onClick={handleRegister}
-            className="bg-blue-500 text-white py-2 rounded-md"
-          >
-            등록
-          </button>
+          <p className="text-xs text-gray-400 mb-3">
+            * 추가 기능을 카테고리로 설정한 경우에만 카테고리를 이용해주세요.
+          </p>
+
+          <div className="flex justify-end">
+            <Button
+              varients="secondary"
+              className="w-40"
+              onClick={handleRegister}
+            >
+              등록
+            </Button>
+          </div>
         </div>
       </section>
+      
 
-      <section>
+      <section className="w-[600px]">
         <h2 className="font-bold mb-4">재고 추가</h2>
 
-        <div className="border rounded-md p-6 flex gap-3 w-[600px]">
-          <input
-            type="text"
-            placeholder="상품명 입력..."
-            value={addName}
-            onChange={(e) => setAddName(e.target.value)}
-            className="border px-3 py-2 rounded-md flex-1"
-          />
+        <div className="border border-gray-300 rounded-md p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <p className="w-20 text-sm">상품명</p>
+            <Input
+              placeholder="상품명 입력..."
+              value={addName}
+              onChange={(e) => setAddName(e.target.value)}
+              className="border px-3 py-2 rounded-md text-sm "
+            />
 
-          <input
-            type="number"
-            placeholder="수량 입력..."
-            value={addQuantity}
-            onChange={(e) => setAddQuantity(e.target.value)}
-            className="border px-3 py-2 rounded-md flex-1"
-          />
+            <p className="w-12 text-sm">수량</p>
+            <Input
+              type="number"
+              placeholder="0"
+              value={addQuantity}
+              onChange={(e) => setAddQuantity(e.target.value)}
+              className="border px-3 py-2 rounded-md text-sm"
+            />
+          </div>
 
-          <button
-            onClick={handleAddStock}
-            className="bg-blue-500 text-white px-6 rounded-md"
-          >
-            추가
-          </button>
+          <div className="flex justify-end">
+            <Button
+              varients="secondary"
+              className="w-40"
+              onClick={handleAddStock}
+            >
+              추가
+            </Button>
+          </div>
         </div>
       </section>
 
-      <section>
+      <section className="w-[600px]">
         <h2 className="font-bold mb-4">상품 삭제</h2>
 
-        <div className="border rounded-md p-6 flex gap-3 w-[600px]">
-          <input
-            type="text"
-            placeholder="상품명 입력..."
-            value={deleteName}
-            onChange={(e) => setDeleteName(e.target.value)}
-            className="border px-3 py-2 rounded-md flex-1"
-          />
+        <div className="border border-gray-300 rounded-md p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <p className="w-20 text-sm">상품명</p>
 
-          <button
-            onClick={handleDelete}
-            className="bg-red-500 text-white px-6 rounded-md"
-          >
-            삭제
-          </button>
+            <Input
+              placeholder="상품명 입력..."
+              value={deleteName}
+              onChange={(e) => setDeleteName(e.target.value)}
+              className="border px-3 py-2 rounded-md text-sm"
+            />
+          </div>
+
+          <div className="flex justify-end">
+            <Button
+              varients="tertiary"
+              className="w-40"
+              onClick={handleDelete}
+            >
+              삭제
+            </Button>
+          </div>
         </div>
       </section>
     </main>

@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Item from "../components/Item";
-import { sortedData } from "../data/mockData";
+import { getSortedItems } from "../apis/itemApi";
 
 const SortPage = () => {
-  const [sortType, setSortType] = useState("");
+  const [sortType, setSortType] = useState("name");
+  const [items, setItems] = useState([]);
 
-  const sortedItems = [...sortedData].sort((a, b) => {
+  useEffect(() => {
+    const fetchSortedItems = async () => {
+      const data = await getSortedItems();
+      setItems(data);
+    };
+
+    fetchSortedItems();
+  }, []);
+  
+  const sortedItems = [...items].sort((a, b) => {
     if (sortType === "name") {
       return a.itemName.localeCompare(b.itemName);
     }

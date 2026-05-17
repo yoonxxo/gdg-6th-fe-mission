@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge"; //설치도 해야함
 const varientsType = {
     primary: "text-blue-500 border-blue-500 hover:bg-blue-50", 
     secondary: "text-white border-blue-500 bg-blue-500 ",
+    tertiary: "text-white border-red-500 bg-red-500"
 }
 
 const Button = ({children, varients="primary", className, onClick}) => {

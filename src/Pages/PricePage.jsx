@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Item from "../components/Item";
-import { priceSelectedData } from "../data/mockData";
+import { getPriceSelectedItems } from "../apis/itemApi";
+import Input from "../components/common/Input";
 
 const PricePage = () => {
   const [lowPrice, setLowPrice] = useState("");
   const [highPrice, setHighPrice] = useState("");
+  const [priceSelectedItems, setPriceSelectedItems] = useState({ items: [] });
 
-  const filteredItems = priceSelectedData.items.filter((item) => {
+  useEffect(() => {
+    const fetchPriceSelectedItems = async () => {
+      const data = await getPriceSelectedItems();
+      setPriceSelectedItems(data);
+    };
+
+    fetchPriceSelectedItems();
+  }, []);
+
+  const filteredItems = priceSelectedItems.items.filter((item) => {
     return (
       (lowPrice === "" || item.price >= Number(lowPrice)) &&
       (highPrice === "" || item.price <= Number(highPrice))
@@ -16,20 +27,18 @@ const PricePage = () => {
   return (
     <main className="flex flex-col items-center mt-16">
       <div className="flex gap-3 mb-10">
-        <input
+        <Input
           type="number"
           placeholder="최소 가격"
           value={lowPrice}
           onChange={(e) => setLowPrice(e.target.value)}
-          className="border px-3 py-2 rounded-md"
         />
 
-        <input
+        <Input
           type="number"
           placeholder="최대 가격"
           value={highPrice}
           onChange={(e) => setHighPrice(e.target.value)}
-          className="border px-3 py-2 rounded-md"
         />
       </div>
 
