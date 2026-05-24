@@ -343,3 +343,38 @@ function Controls() {
 1. Redux처럼 엄격한 상태관리 규칙이 없기 때문에 복잡한 대규모 프로젝트에는 한계가 있다.
 2. Redux보다 생태계가 작아서 추가적인 팀 규칙이 필요할 수 있다.
 3. store를 너무 비대하게 만들거나 상태 구조를 잘못 설계하면 관리가 어려워질 수 있다.
+
+## Zustand 적용해보기
+
+기존에는 장바구니 상태와 상품을 장바구니에 추가하는 함수를 `App.jsx`에서 관리했다.
+
+```jsx
+const [cartItems, setCartItems] = useState([]);
+```
+
+```jsx
+const addToCart = (cartItem) => {
+  setCartItems((prev) => [...prev, cartItem]);
+};
+```
+
+이후 자식 컴포넌트에서 사용하기 위해 상태와 함수를 전달했다.
+
+`Footer` → props로 `cartItems` 전달
+
+`Item` → `Outlet context`를 통해 `addToCart` 전달
+
+이 구조에서는 부모 컴포넌트가 상태 관리와 레이아웃 역할을 동시에 담당하게 되었고, 상태를 사용하기 위해 부모를 거쳐 전달해야 했다.
+
+이를 개선하기 위해 Zustand를 사용해 전역 상태 저장소 useCartStore.js를 만들었다.
+
+장바구니 상태와 관련 로직(cartItems, addToCart, clearCart)을 store로 분리하고, 각 컴포넌트가 필요한 상태를 직접 가져오도록 수정했다.
+
+```jsx
+const cartItems = useCartStore((state) => state.cartItems);
+const addToCart = useCartStore((state) => state.addToCart);
+```
+
+기존처럼 부모 컴포넌트를 통해 상태를 전달하는 구조보다, 필요한 컴포넌트가 직접 상태를 가져오는 방식이 훨씬 깔끔하다고 느꼈다.
+
+특히 `App.jsx`가 상태 전달 역할에서 벗어나 레이아웃 역할에만 집중할 수 있게 되어 컴포넌트 구조가 더 단순해졌다.
