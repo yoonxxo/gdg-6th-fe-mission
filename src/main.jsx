@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDom from 'react-dom/client'
-import './index.css' //TailwindCSS 적용
+import React from "react";
+import ReactDom from "react-dom/client";
+import "./index.css"; //TailwindCSS 적용
 
-import App from './App'
+import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./Pages/Home";
@@ -35,14 +35,13 @@ const router = createBrowserRouter([
       {
         path: "admin",
         element: <AdminPage />,
-      }
-
-    ]
-  }  
+      },
+    ],
+  },
 ]);
 
-ReactDom.createRoot(document.getElementById('root')).render(
+ReactDom.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+);

@@ -1,9 +1,9 @@
 @reference "../index.css";
 
 .nav {
-    @apply flex items-center justify-around px-8 py-4 bg-white;
+  @apply flex items-center justify-around px-8 py-4 bg-white;
 }
 
 .navButton {
-    @apply flex px-3 py-1 text-gray-500 rounded-md hover:bg-gray-100 cursor-pointer;
+  @apply flex px-3 py-1 text-gray-500 rounded-md hover:bg-gray-100 cursor-pointer;
 }

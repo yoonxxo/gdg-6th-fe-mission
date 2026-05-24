@@ -9,7 +9,7 @@ const AdminPage = () => {
       <ProductAdd />
       <ProductDelete />
     </main>
-  )
-}
+  );
+};
 
 export default AdminPage;

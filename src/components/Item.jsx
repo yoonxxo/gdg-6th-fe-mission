@@ -3,7 +3,6 @@ import Input from "./common/Input";
 import { useOutletContext } from "react-router-dom";
 
 const Item = ({ item }) => {
-  
   const [count, setCount] = useState("");
   const [added, setIsAdded] = useState(false);
 

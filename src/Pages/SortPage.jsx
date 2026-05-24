@@ -14,7 +14,7 @@ const SortPage = () => {
 
     fetchSortedItems();
   }, []);
-  
+
   const sortedItems = [...items].sort((a, b) => {
     if (sortType === "name") {
       return a.itemName.localeCompare(b.itemName);

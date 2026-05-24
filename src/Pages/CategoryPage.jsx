@@ -1,5 +1,5 @@
-import {useState, useEffect} from "react"
-import Item from "../components/Item"
+import { useState, useEffect } from "react";
+import Item from "../components/Item";
 import { getCategoryItems } from "../apis/itemApi";
 import { CATEGORIES } from "../constants/categories";
 
@@ -18,13 +18,10 @@ const CategoryPage = () => {
   const filteredItems =
     selectedCategory === ""
       ? categoryData
-      : categoryData.filter(
-          (item) => item.category === selectedCategory
-        );
+      : categoryData.filter((item) => item.category === selectedCategory);
 
   return (
     <main className="flex flex-col items-center mt-16">
-      
       <select
         value={selectedCategory}
         onChange={(e) => {
@@ -41,13 +38,12 @@ const CategoryPage = () => {
           </option>
         ))}
       </select>
-      
 
       {filteredItems.map((item) => (
         <Item key={item.id} item={item} />
       ))}
     </main>
-  )
-}
+  );
+};
 
-export default CategoryPage
+export default CategoryPage;
