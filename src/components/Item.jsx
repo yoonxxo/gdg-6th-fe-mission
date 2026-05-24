@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Input from "./common/Input";
-import { useOutletContext } from "react-router-dom";
+import { useCartStore } from "../stores/useCartstore";
 
 const Item = ({ item }) => {
   const [count, setCount] = useState("");
   const [added, setIsAdded] = useState(false);
 
-  const { addToCart } = useOutletContext();
+  const addToCart = useCartStore((state) => state.addToCart);
 
   const handleChange = (e) => {
     setCount(e.target.value);
@@ -17,7 +17,7 @@ const Item = ({ item }) => {
       productId: item.id,
       name: item.name,
       price: item.price,
-      quantity: item.stock,
+      quantity: Number(count), //사용자에게서 입력받는 수량
     };
 
     addToCart(cartItem);
