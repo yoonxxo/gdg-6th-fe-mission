@@ -5,11 +5,11 @@ import "./index.css"; //TailwindCSS 적용
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Home from "./Pages/Home";
-import CategoryPage from "./Pages/CategoryPage";
-import PricePage from "./Pages/PricePage";
-import SortPage from "./Pages/SortPage";
-import AdminPage from "./Pages/AdminPage";
+import Home from "./pages/Home";
+import CategoryPage from "./pages/CategoryPage";
+import PricePage from "./pages/PricePage";
+import SortPage from "./pages/SortPage";
+import AdminPage from "./pages/AdminPage";
 
 const router = createBrowserRouter([
   {

@@ -1,6 +1,6 @@
 import Button from "./common/Button";
 import { purchaseCartItems } from "../apis/itemApi";
-import { useCartStore } from "../stores/useCartstore";
+import { useCartStore } from "../stores/useCartStore";
 
 const Footer = () => {
   const cartItems = useCartStore((state) => state.cartItems);

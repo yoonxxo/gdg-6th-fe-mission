@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "./common/Input";
-import { useCartStore } from "../stores/useCartstore";
+import { useCartStore } from "../stores/useCartStore";
 
 const Item = ({ item }) => {
   const [count, setCount] = useState("");

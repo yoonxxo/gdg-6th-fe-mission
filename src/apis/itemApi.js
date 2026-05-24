@@ -13,8 +13,8 @@ export const getSortedItems = () => {
 // url을 실제 백엔드 url로 작성
 export const getItems = () => {
   //상품 목록 가져오기
-  return fetch("http://192.168.174.130:8080/products?name=아이패드").then(
-    (response) => response.json(),
+  return fetch("http://192.168.174.130:8080/products").then((response) =>
+    response.json(),
   );
 };
 
