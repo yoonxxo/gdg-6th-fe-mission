@@ -1,11 +1,11 @@
 import {useState, useEffect} from "react"
 import Item from "../components/Item"
 import { getCategoryItems } from "../apis/itemApi";
+import { CATEGORIES } from "../constants/categories";
 
 const CategoryPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categoryData, setCategoryData] = useState([]);
-  const categories = ["의류", "전자기기", "화장품", "식품"];
 
   useEffect(() => {
     const fetchCategoryItems = async () => {
@@ -35,7 +35,7 @@ const CategoryPage = () => {
       >
         <option value="">카테고리 선택</option>
 
-        {categories.map((category) => (
+        {CATEGORIES.map((category) => (
           <option key={category} value={category}>
             {category}
           </option>

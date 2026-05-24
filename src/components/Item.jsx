@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Input from "./common/Input";
-import { addCartItem } from "../apis/itemApi";
 import { useOutletContext } from "react-router-dom";
 
 const Item = ({ item }) => {
@@ -15,18 +14,17 @@ const Item = ({ item }) => {
   };
 
   const handleAddCart = () => {
-    setIsAdded(true);
-
-    addCartItem({
+    const cartItem = {
       productId: item.id,
-      quantity: Number(count),
-    }).then((newCartItem) => {
-      console.log(
-        `${newCartItem.product} ${newCartItem.quantity}개가 장바구니에 추가되었습니다.`
-      );
+      name: item.name,
+      price: item.price,
+      quantity: item.stock,
+    };
 
-      
-    });
+    addToCart(cartItem);
+
+    console.log(`${item.name} ${count}개가 장바구니에 추가되었습니다.`);
+    setIsAdded(true);
   };
 
   return (

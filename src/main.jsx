@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "",
+        index: true, //부모 경로("/")의 기본 페이지
         element: <Home />,
       },
       {
